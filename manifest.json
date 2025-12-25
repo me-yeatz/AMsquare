@@ -1,0 +1,17 @@
+{
+    "name": "AMsquare Project Tracker",
+    "short_name": "AMsquare",
+    "description": "Project management for AMsquare Interior Design - Where Vision Meets Precision",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#623443",
+    "theme_color": "#623443",
+    "icons": [
+        {
+            "src": "/AMSQUARE INTERIORS_Logo.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg",
+            "purpose": "any maskable"
+        }
+    ]
+}
