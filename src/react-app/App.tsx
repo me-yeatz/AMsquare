@@ -40,13 +40,13 @@ type ViewMode = 'dashboard' | 'projects' | 'submissions' | 'clients' | 'finances
 
 export default function App() {
     const [currentUser, setCurrentUser] = useState<UserType | null>(null);
-    const [projects, setProjects] = useState<Project[]>(MOCK_PROJECTS);
+    const [projects] = useState<Project[]>(MOCK_PROJECTS);
     const [clients, setClients] = useState<Client[]>(MOCK_CLIENTS);
     const [financeRecords, setFinanceRecords] = useState<FinanceRecord[]>(MOCK_FINANCE_RECORDS);
     const [chatRooms, setChatRooms] = useState<ChatRoom[]>(MOCK_CHAT_ROOMS);
     const [notes, setNotes] = useState<Note[]>(MOCK_NOTES);
-    const [documents, setDocuments] = useState<ProjectDocument[]>(MOCK_DOCUMENTS);
-    const [allUsers, setAllUsers] = useState<UserType[]>(MOCK_USERS);
+    const [documents] = useState<ProjectDocument[]>(MOCK_DOCUMENTS);
+    const [allUsers] = useState<UserType[]>(MOCK_USERS);
 
     // UI State
     const [viewMode, setViewMode] = useState<ViewMode>('dashboard');
@@ -597,31 +597,3 @@ function NavItem({ icon, label, active = false, onClick, badge }: NavItemProps) 
     );
 }
 
-interface StatCardProps {
-    title: string;
-    value: string;
-    sub: string;
-    color: string;
-    icon: React.ReactNode;
-}
-
-function StatCard({ title, value, sub, color, icon }: StatCardProps) {
-    return (
-        <div className="glass p-6 rounded-2xl relative overflow-hidden group transition-all"
-            style={{ borderColor: 'var(--border)' }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--border-hover)'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}>
-            <div className="absolute top-0 right-0 w-24 h-24 rounded-bl-full -mr-12 -mt-12 transition-transform group-hover:scale-110"
-                style={{ background: 'linear-gradient(to bottom right, var(--bg-tertiary), transparent)' }}></div>
-            <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{ backgroundColor: `${color}20`, color }}>
-                    {icon}
-                </div>
-            </div>
-            <p className="text-sm font-medium mb-2" style={{ color: 'var(--text-muted)' }}>{title}</p>
-            <h3 className="text-3xl font-display font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{value}</h3>
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{sub}</p>
-        </div>
-    );
-}

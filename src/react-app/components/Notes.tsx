@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
-    Plus, Search, Edit2, Trash2, Pin, Tag, AlertCircle,
-    MoreVertical, Palette, Calendar
+    Plus, Search, Edit2, Trash2, Pin, Calendar
 } from 'lucide-react';
 import type { Note, NoteCategory, NotePriority, Project } from '../types';
 

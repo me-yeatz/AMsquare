@@ -1,6 +1,4 @@
-import React from 'react';
 import {
-    FileText,
     CheckCircle2,
     Clock,
     AlertCircle,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users, Plus, Mail, Phone, MapPin, Building2, Search, Edit2, Trash2, DollarSign } from 'lucide-react';
+import { Users, Plus, Mail, Phone, MapPin, Search, Edit2, Trash2, DollarSign } from 'lucide-react';
 import type { Client } from '../types';
 
 interface ClientManagementProps {

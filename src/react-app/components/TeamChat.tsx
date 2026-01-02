@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Users, Circle, Search, Smile, Paperclip } from 'lucide-react';
-import type { ChatMessage, ChatRoom, User } from '../types';
+import { Send, Users, Circle, Search } from 'lucide-react';
+import type { ChatRoom, User } from '../types';
 
 interface TeamChatProps {
     currentUser: User;

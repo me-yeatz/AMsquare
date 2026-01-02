@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    DollarSign, Plus, TrendingUp, TrendingDown, Clock,
+    Plus, TrendingUp, Clock,
     CheckCircle, AlertCircle, FileText, Calendar, Filter
 } from 'lucide-react';
 import type { Payment, PaymentStatus, PaymentType, FinanceRecord } from '../types';
@@ -13,8 +13,7 @@ interface FinanceManagementProps {
 
 const FinanceManagement: React.FC<FinanceManagementProps> = ({
     financeRecords,
-    onAddPayment,
-    onUpdatePayment
+    onAddPayment
 }) => {
     const [selectedProject, setSelectedProject] = useState<string | null>(null);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -59,7 +58,10 @@ const FinanceManagement: React.FC<FinanceManagementProps> = ({
     const handleAddPayment = (e: React.FormEvent) => {
         e.preventDefault();
         if (selectedProject) {
-            onAddPayment(selectedProject, paymentForm);
+            onAddPayment(selectedProject, {
+                ...paymentForm,
+                projectId: selectedProject
+            });
             setShowAddModal(false);
             resetForm();
         }
