@@ -52,6 +52,7 @@ export default function App() {
     const [viewMode, setViewMode] = useState<ViewMode>('dashboard');
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
     // Check for saved user session
     useEffect(() => {
@@ -379,7 +380,9 @@ export default function App() {
                                     }}></span>
                             )}
                         </button>
-                        <button className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg active:scale-95"
+                        <button
+                            onClick={() => setShowNewProjectModal(true)}
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg active:scale-95"
                             style={{
                                 background: 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%)',
                                 color: 'white',
@@ -549,6 +552,35 @@ export default function App() {
                             onSendMessage={handleSendMessage}
                         />
                     </>
+                )}
+
+                {/* New Project Modal */}
+                {showNewProjectModal && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+                        onClick={() => setShowNewProjectModal(false)}>
+                        <div className="glass rounded-2xl p-8 max-w-2xl w-full mx-4 animate-fade-in"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{ borderColor: 'var(--border)' }}>
+                            <h2 className="text-2xl font-display font-bold mb-6"
+                                style={{ color: 'var(--text-primary)' }}>
+                                Create New Project
+                            </h2>
+                            <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
+                                New project creation form coming soon! This feature is under development.
+                            </p>
+                            <div className="flex justify-end gap-3">
+                                <button
+                                    onClick={() => setShowNewProjectModal(false)}
+                                    className="px-6 py-2 rounded-xl font-medium transition-all"
+                                    style={{
+                                        background: 'var(--bg-tertiary)',
+                                        color: 'var(--text-primary)'
+                                    }}>
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 )}
             </main>
         </div>
