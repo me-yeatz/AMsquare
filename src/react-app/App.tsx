@@ -35,6 +35,7 @@ import FinanceManagement from './components/FinanceManagement';
 import TeamChat from './components/TeamChat';
 import Notes from './components/Notes';
 import ProjectDetails from './components/ProjectDetails';
+import LandingPage from './components/LandingPage';
 
 type ViewMode = 'dashboard' | 'projects' | 'submissions' | 'clients' | 'finances' | 'chat' | 'notes';
 
@@ -53,18 +54,21 @@ export default function App() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [showNewProjectModal, setShowNewProjectModal] = useState(false);
+    const [showLandingPage, setShowLandingPage] = useState(true);
 
     // Check for saved user session
     useEffect(() => {
         const savedUser = localStorage.getItem('amsquare_user');
         if (savedUser) {
             setCurrentUser(JSON.parse(savedUser));
+            setShowLandingPage(false);
         }
     }, []);
 
     // Handle login
     const handleLogin = (user: UserType) => {
         setCurrentUser(user);
+        setShowLandingPage(false);
     };
 
     // Handle logout
@@ -213,6 +217,11 @@ export default function App() {
         project.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.location.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // Show landing page first
+    if (showLandingPage && !currentUser) {
+        return <LandingPage onGetStarted={() => setShowLandingPage(false)} />;
+    }
 
     // Show login if not authenticated
     if (!currentUser) {
