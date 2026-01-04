@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    LayoutDashboard,
     FolderKanban,
     FileText,
     DollarSign,
@@ -90,24 +89,29 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
                     {/* Hero Image/Mockup */}
                     <div className="mt-20 relative">
-                        <div className="glass rounded-3xl p-8 shadow-2xl border"
+                        <div className="glass rounded-3xl p-4 md:p-8 shadow-2xl border"
                             style={{
                                 borderColor: 'var(--border)',
                                 background: 'var(--bg-secondary)'
                             }}>
-                            <div className="aspect-video rounded-2xl flex items-center justify-center"
-                                style={{
-                                    background: 'linear-gradient(135deg, var(--accent-light) 0%, transparent 100%)',
-                                    border: '2px solid var(--border)'
-                                }}>
-                                <div className="text-center">
-                                    <LayoutDashboard size={64} style={{ color: 'var(--accent-primary)' }} className="mx-auto mb-4" />
-                                    <p className="text-lg font-medium" style={{ color: 'var(--text-secondary)' }}>
-                                        Beautiful Dashboard Preview
-                                    </p>
-                                </div>
+                            <div className="rounded-2xl overflow-hidden shadow-xl">
+                                <img
+                                    src="/Screenshot Desktop.png"
+                                    alt="AMsquare Project Tracker Dashboard"
+                                    className="w-full h-auto"
+                                    style={{
+                                        display: 'block',
+                                        maxWidth: '100%',
+                                        height: 'auto'
+                                    }}
+                                />
                             </div>
                         </div>
+                        {/* Decorative elements */}
+                        <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-3xl opacity-20"
+                            style={{ background: 'var(--accent-primary)' }} />
+                        <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full blur-3xl opacity-20"
+                            style={{ background: 'var(--accent-secondary)' }} />
                     </div>
                 </div>
             </section>
