@@ -36,12 +36,13 @@ import TeamChat from './components/TeamChat';
 import Notes from './components/Notes';
 import ProjectDetails from './components/ProjectDetails';
 import LandingPage from './components/LandingPage';
+import NewProjectForm from './components/NewProjectForm';
 
 type ViewMode = 'dashboard' | 'projects' | 'submissions' | 'clients' | 'finances' | 'chat' | 'notes';
 
 export default function App() {
     const [currentUser, setCurrentUser] = useState<UserType | null>(null);
-    const [projects] = useState<Project[]>(MOCK_PROJECTS);
+    const [projects, setProjects] = useState<Project[]>(MOCK_PROJECTS);
     const [clients, setClients] = useState<Client[]>(MOCK_CLIENTS);
     const [financeRecords, setFinanceRecords] = useState<FinanceRecord[]>(MOCK_FINANCE_RECORDS);
     const [chatRooms, setChatRooms] = useState<ChatRoom[]>(MOCK_CHAT_ROOMS);
@@ -89,6 +90,18 @@ export default function App() {
     const handleProjectClick = (project: Project) => {
         setSelectedProject(project);
         setViewMode('projects'); // Ensure we are in projects view
+    };
+
+    const handleAddProject = (projectData: Omit<Project, 'id'>) => {
+        const newProject: Project = {
+            ...projectData,
+            id: `p${projects.length + 1}`
+        };
+        setProjects([...projects, newProject]);
+        setShowNewProjectModal(false);
+
+        // Optionally switch to projects view to show the new project
+        setViewMode('projects');
     };
 
     // Client management handlers
@@ -565,31 +578,11 @@ export default function App() {
 
                 {/* New Project Modal */}
                 {showNewProjectModal && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-                        onClick={() => setShowNewProjectModal(false)}>
-                        <div className="glass rounded-2xl p-8 max-w-2xl w-full mx-4 animate-fade-in"
-                            onClick={(e) => e.stopPropagation()}
-                            style={{ borderColor: 'var(--border)' }}>
-                            <h2 className="text-2xl font-display font-bold mb-6"
-                                style={{ color: 'var(--text-primary)' }}>
-                                Create New Project
-                            </h2>
-                            <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
-                                New project creation form coming soon! This feature is under development.
-                            </p>
-                            <div className="flex justify-end gap-3">
-                                <button
-                                    onClick={() => setShowNewProjectModal(false)}
-                                    className="px-6 py-2 rounded-xl font-medium transition-all"
-                                    style={{
-                                        background: 'var(--bg-tertiary)',
-                                        color: 'var(--text-primary)'
-                                    }}>
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <NewProjectForm
+                        clients={clients}
+                        onSubmit={handleAddProject}
+                        onClose={() => setShowNewProjectModal(false)}
+                    />
                 )}
             </main>
         </div>
